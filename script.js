@@ -7,7 +7,7 @@ async function getMovies(searchTerm = '') {
 
     if (searchTerm) {
         url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchTerm}`;
-        currentPage = 1;
+        currentPage = 1; // Resetting currentPage to 1 if there's a searchTerm, we should keep track of the currentPage separately for searches and the general list
     }
 
     const response = await fetch(url);
@@ -21,7 +21,9 @@ async function getMovies(searchTerm = '') {
     const movies = data.results;
     const moviesGrid = document.getElementById('movies-grid');
 
-    moviesGrid.innerHTML = ''; // clear the grid before adding new movies
+    if(currentPage === 1) {
+        moviesGrid.innerHTML = ''; // Clear the grid before adding new movies only if it's the first page
+    }
 
     for (let movie of movies) {
         const movieCard = document.createElement('div');
@@ -40,8 +42,8 @@ async function getMovies(searchTerm = '') {
         moviesGrid.appendChild(movieCard);
     }
 
-    currentPage++;
-    currentSearchTerm = searchTerm;
+    currentPage++; // Increment the currentPage after the movies have been successfully loaded and added to the grid
+    currentSearchTerm = searchTerm; // Update the currentSearchTerm after the movies have been successfully loaded and added to the grid
 }
 
 function openModal(movie) {
@@ -62,7 +64,7 @@ document.getElementById('close-modal-btn').addEventListener('click', () => {
 document.getElementById('close-search-btn').addEventListener('click', () => {
     document.getElementById('search-input').value = '';
     currentSearchTerm = '';
-    currentPage = 1; // reset the currentPage to 1
+    currentPage = 1; // Reset the currentPage to 1 when the search is closed
     getMovies();
 });
 
@@ -75,4 +77,4 @@ document.getElementById('search-input').addEventListener('keyup', (event) => {
 
 document.getElementById('load-more-movies-btn').addEventListener('click', () => getMovies(currentSearchTerm));
 
-getMovies();
+getMovies(); // Initial call to load the first page of movies
