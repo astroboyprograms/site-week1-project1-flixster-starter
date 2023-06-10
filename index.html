@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flixster</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Flixster 🍿 </h1>
+
+    <input type="text" id="search-input" placeholder="Search for a movie..." aria-label="Search for a movie">
+
+    <button id="close-search-btn" aria-label="Close search">X</button>
+
+    <div id="movies-grid" class="active">
+        <!-- Movie cards will be inserted here by JavaScript -->
+    </div>
+    
+    <button id="load-more-movies-btn">Load more movies</button>
+
+    <div id="movie-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal-btn" class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <img id="modal-poster" src="" alt="">
+            <p id="modal-votes"></p>
+            <p id="modal-overview"></p>
+        </div>
+    </div>
+
+    <script defer src="script.js"></script>
+</body>
+</html>
+
